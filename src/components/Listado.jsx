@@ -12,6 +12,16 @@ export const Listado = () => {
             .then(data => setCandidatos(data.results))
     }, [])
 
+    const cambiarUnCadidato = (indexCandidato) => {
+        fetch(`https://randomuser.me/api/?results=1`)
+            .then(resp => resp.json())
+            .then((data) => {
+                const provisional = [...candidatos]
+                provisional[indexCandidato] = { ...data.results[0] }
+                setCandidatos(provisional);
+            })
+    };
+
 
 
     return (
@@ -19,7 +29,7 @@ export const Listado = () => {
             <Layout title='Los Candidatos' >
                 {
                     candidatos.map((candidato, i) => (
-                        <CardCandidato key={i} candidato={candidato} />
+                        <CardCandidato key={i} candidato={candidato} onCambiar={cambiarUnCadidato} indexCandidato={i} />
                     ))
                 }
             </Layout>
