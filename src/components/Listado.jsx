@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { CardCandidato } from './CardCandidato'
 import { Layout } from './layout'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { agregarPreSelec } from '../store/miSlice'
 import { Link } from 'react-router-dom'
 
@@ -11,7 +11,7 @@ export const Listado = () => {
 
     const dispatch = useDispatch();
 
-    const listaPreseleccionados = useSelector(state => state.preSelecionados.preElegidos)
+    // const listaPreseleccionados = useSelector(state => state.preSelecionados.preElegidos)
 
     useEffect(() => {
         fetch(`https://randomuser.me/api/?results=8`)
@@ -32,8 +32,9 @@ export const Listado = () => {
     const preSelecionarUno = (candidato, indexCandidato) => {
 
         const candidatoPlusPlaza = { ...candidato, plaza: "" }
-        dispatch(agregarPreSelec(candidato))
+        dispatch(agregarPreSelec(candidatoPlusPlaza))
         cambiarUnCadidato(indexCandidato)
+
     };
 
 
@@ -45,6 +46,7 @@ export const Listado = () => {
                     candidatos.map((candidato, i) => (
                         <CardCandidato key={i} candidato={candidato} onCambiar={cambiarUnCadidato} onGuardar={preSelecionarUno} indexCandidato={i} />
                     ))
+
 
                 }
             </Layout>

@@ -20,7 +20,17 @@ export const preSeleccionSlice = createSlice({
             const { indice, nuevaPlaza } = action.payload;
 
             state.preElegidos[indice].plaza = nuevaPlaza
-        }
+        },
+
+        eliminarUnElegidos: (state, action) => {
+
+            // console.log(action.payload)
+            // const { login } = action.payload
+            // console.log(login, login.uuid)
+            state.preElegidos = state.preElegidos.filter((el, i) => i !== action.payload)
+
+            // state.preElegidos = state.preElegidos.filter(elegido => elegido.login.uuid !== login.uuid)
+        },
 
     }
 })
@@ -48,7 +58,7 @@ export const plazasSlice = createSlice({
     }
 });
 
-export const { agregarPreSelec, modificarPlaza } = preSeleccionSlice.actions;
+export const { agregarPreSelec, modificarPlaza, eliminarUnElegidos } = preSeleccionSlice.actions;
 export const { } = plazasSlice.actions;
 
 

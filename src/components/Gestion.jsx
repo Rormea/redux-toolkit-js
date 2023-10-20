@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Layout } from './layout'
 import { Link } from 'react-router-dom'
 import { Preselecionado } from './Preselecionado'
-import { modificarPlaza } from '../store/miSlice'
+import { eliminarUnElegidos, modificarPlaza } from '../store/miSlice'
 
 export const Gestion = () => {
 
@@ -21,6 +21,11 @@ export const Gestion = () => {
         ))
     }
 
+    const elimiarElegido = (indexElegido) => {
+        // console.log(indexElegido)
+        dispatch(eliminarUnElegidos(indexElegido))
+    };
+
 
     return (
         <>
@@ -37,9 +42,9 @@ export const Gestion = () => {
 
             <Layout title='Lista de Pre Selecionados' >
                 {
-                    listaPreseleccionados.map((candidato, i) =>
+                    listaPreseleccionados.map((elegido, i) =>
 
-                        <Preselecionado key={i} candidato={candidato} onActulizarPlaza={actualizarPlaza} />
+                        <Preselecionado key={i} elegido={elegido} onActulizarPlaza={actualizarPlaza} indexElegido={i} onEliminar={elimiarElegido} />
 
                     )
                 }
